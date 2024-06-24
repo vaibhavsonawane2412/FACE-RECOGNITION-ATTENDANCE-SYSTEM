@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Capture Samples</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #c3c9d0; /* Light grey background */
+        color: #333;
+        text-align: center;
+        transition: background 0.3s, color 0.3s; /* Smooth transitions */
+      }
+
+      h1 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        color: #2c3e50;
+        transition: color 0.3s;
+      }
+
+      .video-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        border: 3px solid #2980b9; /* Blue border */
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: border 0.3s, box-shadow 0.3s;
+      }
+
+      video {
+        border-radius: 15px;
+        transition: border-radius 0.3s;
+      }
+
+      #captureButton {
+        margin-top: 20px;
+        padding: 15px 30px;
+        font-size: 1.2em;
+        cursor: pointer;
+        background-color: #1abc9c;
+        border: none;
+        border-radius: 30px;
+        color: white;
+        transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      #captureButton:hover {
+        background-color: #16a085;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      #status {
+        margin-top: 20px;
+        font-size: 1.2em;
+        color: #34495e;
+        transition: color 0.3s;
+      }
+
+      .btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        background-color: #3498db;
+        border: none;
+        border-radius: 20px;
+        color: white;
+        transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn:hover {
+        background-color: #2980b9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Capture Samples for Face Recognition</h1>
+    <a href="{{ url_for('capture_samples_page') }}" class="btn">Take Samples</a>
+    <div class="video-container">
+      <video id="video" width="640" height="480" autoplay></video>
+    </div>
+    <button id="captureButton">Start Capturing</button>
+    <p id="status"></p>
+
+    <script>
+      const video = document.getElementById('video');
+      const captureButton = document.getElementById('captureButton');
+      const status = document.getElementById('status');
+
+      // Get access to the camera
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+          video.srcObject = stream;
+          video.play();
+        });
+      }
+
+      let sampleNum = 0;
+      const username = prompt("Enter your username:");  // Get username from the user
+      console.log("Username:", username);  // Debugging statement
+
+      async function captureSample() {
+        const canvas = document.createElement('canvas');
+        canvas.width = video.width;
+        canvas.height = video.height;
+        const context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0, video.width, video.height);
+        const dataURL = canvas.toDataURL('image/jpeg');
+
+        sampleNum++;
+
+        const payload = {
+          username: username,
+          image: dataURL,
+          sample_num: sampleNum
+        };
+
+        try {
+          const response = await fetch('/save_sample', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+          const data = await response.json();
+          if (data.status === 'success') {
+            status.textContent = `Sample ${data.sample_num} saved successfully.`;
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+
+        if (sampleNum < 100) {
+          setTimeout(captureSample, 200);  // Capture next sample after a delay
+        } else {
+          status.textContent = 'Finished capturing 100 samples.';
+        }
+      }
+
+      captureButton.addEventListener('click', () => {
+        sampleNum = 0;  // Reset sample number
+        status.textContent = 'Starting to capture samples...';
+        captureSample();  // Start capturing samples
+      });
+    </script>
+  </body>
+</html>

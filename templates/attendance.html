@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendance Management Dashboard</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #81ecec, #74b9ff, #a29bfe);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-size: 400% 400%;
+        animation: gradientAnimation 15s ease infinite;
+      }
+
+      @keyframes gradientAnimation {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 20px;
+        padding: 30px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        animation: fadeIn 1.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      h2 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 28px;
+      }
+
+      .option-container {
+        margin-top: 30px;
+        animation: slideIn 1s ease;
+      }
+
+      @keyframes slideIn {
+        from { opacity: 0; transform: translateX(-20px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 15px 30px;
+        margin: 10px;
+        text-decoration: none;
+        border-radius: 50px;
+        font-size: 18px;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn:nth-child(1) {
+        background-color: #00b894;
+        color: #0a0000;
+      }
+
+      .btn:nth-child(1):hover {
+        background-color: #00a083;
+      }
+
+      .btn:nth-child(2) {
+        background-color: #fdcb6e;
+        color: #0a0000;
+      }
+
+      .btn:nth-child(2):hover {
+        background-color: #e0b565;
+      }
+
+      .btn:nth-child(3) {
+        background-color: #fab1a0;
+        color: #0a0000;
+      }
+
+      .btn:nth-child(3):hover {
+        background-color: #e19c8e;
+      }
+
+      .result-container {
+        margin-top: 30px;
+        animation: fadeIn 2s ease;
+      }
+
+      .result-container p {
+        font-size: 18px;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Attendance Management Dashboard</h2>
+      <div class="option-container">
+        <button class="btn" onclick="markAttendance()">Mark Attendance</button>
+      </div>
+      <div id="result" class="result-container"></div>
+    </div>
+    <script>
+      function markAttendance() {
+        fetch('/mark_attendance', { method: 'POST' })
+          .then(response => response.json())
+          .then(data => {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<p>${data.message}</p>`;
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      }
+    </script>
+  </body>
+</html>

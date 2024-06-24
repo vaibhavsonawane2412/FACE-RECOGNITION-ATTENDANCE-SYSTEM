@@ -1,0 +1,82 @@
+/* dashboard.css */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5em; /* Adjust this value for the desired font size */
+  margin-top: 60px; /* Adjust this value for the desired space above the title */
+  margin-bottom: 50px;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-top: 10; /* Remove top padding as it is managed by the margin-top of h1 */
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+  border: 1px solid #007bff;
+  padding: 8px 16px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+a:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.dashboard {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.dashboard-section {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  width: 300px; /* Fixed width for consistency */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.dashboard-section h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.logout-link {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  color: #007bff;
+  text-decoration: none;
+  z-index: 1000; /* Ensure it is on top of other elements */
+}

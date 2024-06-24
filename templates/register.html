@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}" />
+    <style>
+      body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background-color: #e0f7fa;
+          margin: 0;
+          padding: 0;
+          transition: background-color 0.5s ease; /* Smooth transition for background color */
+      }
+
+      .container {
+          max-width: 400px;
+          margin: 100px auto;
+          padding: 20px;
+          background-color: #ffffff;
+          border-radius: 10px;
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+          transition: box-shadow 0.3s ease; /* Smooth transition for box-shadow */
+      }
+
+      .container:hover {
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+      }
+
+      h2 {
+          color: #00796b;
+          text-align: center;
+          margin-bottom: 20px;
+          font-size: 24px;
+      }
+
+      .form-group {
+          margin-bottom: 20px;
+      }
+
+      label {
+          display: block;
+          font-weight: bold;
+          margin-bottom: 5px;
+          color: #004d40;
+      }
+
+      input[type="text"],
+      input[type="password"],
+      input[type="email"] {
+          width: 100%;
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid #b0bec5;
+          box-sizing: border-box;
+          transition: border 0.3s ease; /* Smooth transition for input border */
+      }
+
+      input[type="text"]:focus,
+      input[type="password"]:focus,
+      input[type="email"]:focus {
+          border: 1px solid #00796b;
+      }
+
+      button[type="submit"] {
+          width: 100%;
+          padding: 10px;
+          background-color: #00796b;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for button */
+          font-size: 16px;
+      }
+
+      button[type="submit"]:hover {
+          background-color: #004d40;
+          transform: translateY(-2px); /* Slight lift on hover */
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+      }
+
+      p {
+          text-align: center;
+          margin-top: 20px;
+      }
+
+      p a {
+          color: #00796b;
+          text-decoration: none;
+          transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition for link */
+      }
+
+      p a:hover {
+          color: #004d40;
+          text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Register</h2>
+      <form method="post" action="{{ url_for('register') }}">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit">Register</button>
+      </form>
+
+      <p>
+        Already have an account?
+        <a href="{{ url_for('login') }}">Login here</a>.
+      </p>
+    </div>
+  </body>
+</html>

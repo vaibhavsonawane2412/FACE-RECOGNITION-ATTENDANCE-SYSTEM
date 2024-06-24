@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emotion Detection</title>
+    <style>
+      body {
+          background-color: lightblue;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+          font-family: Arial, sans-serif;
+      }
+      h2 {
+          color: white;
+          font-size: 2em;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 id="status">Real-time Emotion Detection is Running...</h2>
+
+    <script>
+      // Simulating real-time update of detection status
+      setInterval(function() {
+          var statusElement = document.getElementById('status');
+          var currentTime = new Date().toLocaleTimeString();
+          var currentStatus = statusElement.innerText;
+
+          // Update status with a random change every 5 seconds
+          if (Math.random() < 0.5) {
+              statusElement.innerText = 'Emotion detected! ' + currentTime;
+          } else {
+              statusElement.innerText = 'No emotion detected. ' + currentTime;
+          }
+      }, 5000); // Update every 5 seconds
+    </script>
+  </body>
+</html>

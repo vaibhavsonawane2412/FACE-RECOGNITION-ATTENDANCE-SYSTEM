@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/dashboard.css') }}" />
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #e0f7fa;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        position: relative;
+        animation: fadeIn 1s ease-in-out;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #00796b;
+      }
+      ul {
+        list-style: none;
+        padding-left: 0;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      a {
+        text-decoration: none;
+        color: #007bff;
+        transition: color 0.3s ease;
+      }
+      a:hover {
+        text-decoration: underline;
+        color: #0056b3;
+      }
+      .dashboard {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 20px;
+      }
+      .dashboard-section {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .dashboard-section:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+      }
+      .dashboard-section h3 {
+        margin-top: 0;
+        color: #333;
+      }
+      .logout-link {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: #78aade;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .dashboard-section:nth-child(odd) {
+        background-color: #e1f5fe;
+      }
+      .dashboard-section:nth-child(even) {
+        background-color: #f1f1dd;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Admin Dashboard</h1>
+    <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %}
+      <ul>
+        {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %} {% endwith %}
+      <div class="dashboard">
+        <div class="dashboard-section">
+          <h3>User Management</h3>
+          <ul>
+            <li><a href="{{ url_for('add_user') }}">Add New User</a></li>
+            <li><a href="{{ url_for('user_list') }}">View Users</a></li>
+          </ul>
+        </div>
+        <div class="dashboard-section">
+          <h3>Attendance Management</h3>
+          <ul>
+            <li>
+              <a href="{{ url_for('view_attendance') }}"
+                >View Attendance Records</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('export_attendance_excel') }}"
+                >Export Attendance Data</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="dashboard-section">
+          <h3>Face Recognition Management</h3>
+          <ul>
+            <li>
+              <a href="{{ url_for('capture_samples_page') }}"
+                >Capture Samples</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('train_model_route') }}">Train Model</a>
+            </li>
+          </ul>
+        </div>
+        <div class="dashboard-section">
+          <h3>Emotion Detection Summary</h3>
+          <ul>
+            <li>
+              <a href="{{ url_for('emotion_summary') }}"
+                >View Emotion Summary</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="dashboard-section">
+          <h3>Age and Gender Detection Results</h3>
+          <ul>
+            <li>
+              <a href="{{ url_for('age_gender_summary') }}"
+                >View Age and Gender Results</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="dashboard-section">
+          <h3>Landmark Detection Results</h3>
+          <ul>
+            <li>
+              <a href="{{ url_for('landmark_summary') }}"
+                >View Landmark Results</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

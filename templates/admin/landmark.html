@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landmark Detection</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #ff6f91, #ff9671, #ffc75f, #f9f871);
+        background-size: 400% 400%;
+        animation: gradientAnimation 10s ease infinite;
+        margin: 0;
+        padding: 0;
+      }
+      @keyframes gradientAnimation {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+      h1 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        color: #333;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .logout-link {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: #007bff;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .logout-link:hover {
+        color: #0056b3;
+        text-decoration: underline;
+      }
+      p {
+        font-size: 1.2em;
+        color: #666;
+        margin-bottom: 20px;
+      }
+      .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+        margin: 0 auto;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Landmark Detection</h1>
+      <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+      <p>Landmark detection process has started. Check the logs for details.</p>
+      <div class="loader"></div>
+    </div>
+  </body>
+</html>
