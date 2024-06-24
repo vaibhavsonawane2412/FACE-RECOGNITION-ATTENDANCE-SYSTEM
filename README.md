@@ -1,6 +1,6 @@
 # Face Recognition Attendance System
 
-Welcome to the Face Recognition Attendance System repository! This project utilizes computer vision techniques for automated attendance marking and real-time emotion detection.
+Welcome to the Face Recognition Attendance System repository! This project utilizes computer vision techniques for automated attendance marking and real-time Age, Gender, and emotion detection.
 
 ## Overview
 
@@ -19,30 +19,49 @@ The Face Recognition Attendance System is designed to streamline the process of 
 ### Installation
 
 1. **Clone the repository:**
-   ```bash
+   ```
    git clone https://github.com/vaibhavsonawane2412/FACE-RECOGNITION-ATTENDANCE-SYSTEM.git
-   cd FACE-RECOGNITION-ATTENDANCE-SYSTEM```
+   ```
    
-2. **Set up a virtual environment:**
-   ```bash
+   ```
+   cd FACE-RECOGNITION-ATTENDANCE-SYSTEM
+   ```
+   
+3. **Set up a virtual environment:**
+   ```
    python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate```
+   source venv\Scripts\activate
+   ```
 
-3. **Install dependencies:**
-  ```bash
-  pip install -r requirements.txt ```
+4. **Install dependencies:**
+   ```
+   pip install -r requirements.txt
+   ```
 
 ### Database Initialization
-  Initialize the SQLite database:
-  ```bash
-  python init_db.py```
+   **Initialize the SQLite database:**
+   ```
+   python init_db.py
+   ```
 
 ### Running the Application
-Start the Flask application:
-```bash
-python app.py```
+   **Start the Flask application:**
+   ```
+   python app.py
+   ```
 
 ### Access the application:
-Open your web browser and go to
-```bash
-http://127.0.0.1:5000```
+   **Open your web browser and go to**
+   ```
+   http://127.0.0.1:5000
+   ```
+## Project Structure
+- **app.py:** Main application entry point.
+- **init_db.py:** Script for initializing the SQLite database.
+- **static/:** Directory for CSS and JavaScript files.
+- **templates/:** HTML templates for different pages of the application.
+
+## Usage
+- Connect a webcam or camera for face recognition and emotion detection.
+- Register employees and set up their profiles for attendance.
+- Navigate to the admin dashboard to view attendance summaries and emotional insights.
